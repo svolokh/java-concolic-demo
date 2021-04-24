@@ -220,6 +220,7 @@ public class Demo extends JPanel {
                 frame.setTitle("java-concolic demo");
                 frame.setContentPane(new Demo());
                 frame.setSize(1280, 720);
+                frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 frame.setVisible(true);
                 frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             }
