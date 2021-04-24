@@ -51,6 +51,8 @@ public class Demo extends JPanel {
     }
 
     public Demo() {
+        System.out.println("Working directory: " + new File(".").getAbsolutePath());
+
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
 
