@@ -27,7 +27,7 @@ public class Main {
         }
 
         public boolean isRoomHot() {
-            return isRoomHot;
+            return roomHot;
         }
 
         public boolean isDoorClosed() {
@@ -46,7 +46,7 @@ public class Main {
             int message = Concolic.inputInt();
             Concolic.assume(message >= 0 && message <= 3);
             controller.processMessage(message);
-            Concolic.assertFalse(isRoomHot && isDoorClosed && !ac);
+            Concolic.assertFalse(controller.isRoomHot() && controller.isDoorClosed() && !controller.isAcOn());
         }
     }
 
