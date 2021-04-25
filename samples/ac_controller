@@ -1,0 +1,56 @@
+import csci699cav.Concolic;
+
+public class Main {
+
+    public static class AcController {
+        private boolean roomHot = false;
+        private boolean doorClosed = false;
+        private boolean ac = false;
+
+        public void processMessage(int message) {
+            if (message == 0) {
+                roomHot = true;
+            }
+            if (message == 1) {
+                roomHot = false;
+            }
+            if (message == 2) {
+                doorClosed = false;
+                ac = false;
+            }
+            if (message == 3) {
+                doorClosed = true;
+                if (roomHot) {
+                    ac = true;
+                }
+            }
+        }
+
+        public boolean isRoomHot() {
+            return isRoomHot;
+        }
+
+        public boolean isDoorClosed() {
+            return doorClosed;
+        }
+
+        public boolean isAcOn() {
+            return ac;
+        }
+    }
+
+    @Concolic.Entrypoint
+    public static void run() {
+        AcController controller = new AcController();
+        for (int i = 0; i != 2; ++i) {
+            int message = Concolic.inputInt();
+            Concolic.assume(message >= 0 && message <= 3);
+            controller.processMessage(message);
+            Concolic.assertFalse(isRoomHot && isDoorClosed && !ac);
+        }
+    }
+
+    public static void main(String[] args) {
+        run();
+    }
+}

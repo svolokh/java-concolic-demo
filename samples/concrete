@@ -2,7 +2,7 @@ import csci699cav.Concolic;
 
 public class Main {
     @Concolic.Entrypoint
-    public static void h() {
+    public static void run() {
         int x = Concolic.inputInt();
         long time = System.currentTimeMillis();
         int y = (int)((time/10000) % 10);
@@ -10,6 +10,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        h();
+        run();
     }
 }
+
