@@ -98,11 +98,11 @@ public class Demo extends JPanel {
             samples.remove(pri);
         }
         samples.sort(String::compareTo);
-        for (String sample : samples) {
-            sampleSelector.addItem(sample);
-        }
         for (int i = priority.length - 1; i >= 0; --i) {
             samples.addFirst(priority[i]);
+        }
+        for (String sample : samples) {
+            sampleSelector.addItem(sample);
         }
         sampleSelector.setSelectedItem("simple");
         ActionListener l = actionEvent -> {
