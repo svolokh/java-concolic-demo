@@ -11,7 +11,7 @@ schedule-shutdown() {
 schedule-shutdown &
 
 echo "Compiling and instrumenting..."
-if ! make >/dev/null 2>builderr.txt; then
+if ! make 2>&1; then #>/dev/null 2>builderr.txt; then
     echo "Error when compiling code: "
     cat builderr.txt
     exit
