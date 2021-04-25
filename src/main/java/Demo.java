@@ -97,7 +97,7 @@ public class Demo extends JPanel {
         for (String sample : samples) {
             sampleSelector.addItem(sample);
         }
-        sampleSelector.setSelectedItem("dart2");
+        sampleSelector.setSelectedItem("simple");
         ActionListener l = actionEvent -> {
             try (BufferedReader br = new BufferedReader(new FileReader(new File("samples", (String)sampleSelector.getSelectedItem()))))
             {
