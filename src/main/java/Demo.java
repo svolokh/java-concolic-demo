@@ -92,10 +92,17 @@ public class Demo extends JPanel {
         JPanel jp = new JPanel();
         jp.setLayout(new FlowLayout(FlowLayout.LEADING));
         JComboBox<String> sampleSelector = new JComboBox<>();
-        ArrayList<String> samples = new ArrayList<String>(Arrays.asList(new File("samples").list()));
+        String[] priority = new String[] {"simple", "ac_controller", "concrete", "rt"};
+        LinkedList<String> samples = new LinkedList<String>(Arrays.asList(new File("samples").list()));
+        for (String pri : priority) {
+            samples.remove(pri);
+        }
         samples.sort(String::compareTo);
         for (String sample : samples) {
             sampleSelector.addItem(sample);
+        }
+        for (int i = priority.length - 1; i >= 0; --i) {
+            samples.addFirst(priority[i]);
         }
         sampleSelector.setSelectedItem("simple");
         ActionListener l = actionEvent -> {
