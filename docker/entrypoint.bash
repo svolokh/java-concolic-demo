@@ -10,6 +10,10 @@ schedule-shutdown() {
 }
 schedule-shutdown &
 
+if [[ -f /root/demo-code/stopOnCrash ]]; then
+    sed -i 's/"stopOnError": false/"stopOnError": true/g' /root/demo/config.json
+fi
+
 echo "Compiling and instrumenting..."
 if ! make >/dev/null 2>builderr.txt; then
     echo "Error when compiling code: "

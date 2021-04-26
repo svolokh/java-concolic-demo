@@ -125,6 +125,11 @@ public class Demo extends JPanel {
         l.actionPerformed(null);
         jp.add(sampleSelector);
 
+        JCheckBox stopOnCrash = new JCheckBox();
+        stopOnCrash.setText("Stop on crash?");
+        stopOnCrash.setSelected(false);
+        jp.add(stopOnCrash);
+
         gridbag.setConstraints(jp, c);
         add(jp);
 
@@ -158,9 +163,15 @@ public class Demo extends JPanel {
                         fw.write(textArea.getText());
                     }
 
+                    if (stopOnCrash.isSelected()) {
+                        try (FileWriter fw = new FileWriter(new File(f, "stopOnCrash"))) {
+                            fw.write("");
+                        }
+                    }
+
                     String cidfile = new File(f, "cid.txt").getAbsolutePath();
-                    Process p = Runtime.getRuntime().exec("docker run -t --cidfile " + cidfile + " -v " + f.getAbsolutePath() + ":/root/demo-code --network=none -m 1g java-concolic-demo");
-                    System.out.println("docker run --cidfile " + cidfile + " -v " + f.getAbsolutePath() + ":/root/demo-code --network=none -m 1g java-concolic-demo");
+                    Process p = Runtime.getRuntime().exec("docker run -t --cidfile " + cidfile
+                            + " -v " + f.getAbsolutePath() + ":/root/demo-code --network=none -m 1g java-concolic-demo");
                     b.setEnabled(false);
                     readerThread = new Thread(new Runnable() {
                         @Override
