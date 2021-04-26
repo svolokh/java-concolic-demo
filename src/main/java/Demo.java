@@ -92,7 +92,7 @@ public class Demo extends JPanel {
         JPanel jp = new JPanel();
         jp.setLayout(new FlowLayout(FlowLayout.LEADING));
         JComboBox<String> sampleSelector = new JComboBox<>();
-        String[] priority = new String[] {"simple", "ac_controller", "concrete", "rt"};
+        String[] priority = new String[] {"simple", "ac_controller", "stack", "concrete", "rt"};
         LinkedList<String> samples = new LinkedList<String>(Arrays.asList(new File("samples").list()));
         for (String pri : priority) {
             samples.remove(pri);

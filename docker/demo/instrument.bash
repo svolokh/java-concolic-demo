@@ -4,7 +4,11 @@ JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 CLASSPATH=instrumentation/bin
 
 LIBRARY_DEPS_OUT=deps.txt $JAVA_HOME/bin/java -Xmx4g -cp java-concolic-1.0-SNAPSHOT.jar csci699cav.Main \
-	-prepend-classpath -soot-class-path "$CLASSPATH:bin" -keep-offset -process-dir bin
+	-prepend-classpath -soot-class-path "$CLASSPATH:bin" -keep-offset -process-dir bin | tee out.txt
+
+if [[ $(cat out.txt | grep concrete | wc -l) > 0 ]]; then
+	cat out.txt | grep concrete | grep -v '<java.lang.Object: void <init>()>' > concrete.txt
+fi
 
 cat deps.txt | sed 1d > rt-deps.txt
 rm deps.txt

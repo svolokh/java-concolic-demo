@@ -1,0 +1,25 @@
+import csci699cav.Concolic;
+
+import java.util.LinkedList;
+
+public class Main {
+
+    public static class IntegerHolder {
+        public int value;
+    }
+
+    @Concolic.Entrypoint
+    public static void run() {
+        LinkedList<IntegerHolder> l = new LinkedList<>();
+        IntegerHolder h = new IntegerHolder();
+        h.value = Concolic.inputInt();
+        l.add(h);
+        Concolic.assertFalse(l.get(0).value == 3);   
+    }
+
+
+    public static void main(String[] args) {
+        run();
+    }
+
+}

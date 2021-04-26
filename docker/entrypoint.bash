@@ -20,4 +20,9 @@ if ! make >/dev/null 2>builderr.txt; then
     cat builderr.txt
     exit
 fi
+
+if [[ -f /root/demo/concrete.txt ]]; then
+    cat /root/demo/concrete.txt
+fi
+
 python3 concolic.py config.json

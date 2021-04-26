@@ -1,0 +1,57 @@
+import csci699cav.Concolic;
+
+public class Main {
+
+    public static class ListNode {
+        public int value;
+        public ListNode next;
+
+        public ListNode(int value, ListNode next) {
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+    public static class Stack {
+        private ListNode head = null;
+
+        public void push(int value) {
+            head = new ListNode(value, head);
+        }
+
+        public int pop() {
+            Concolic.assertTrue(head != null);
+            int result = head.value;
+            head = head.next;
+            return result;
+        }
+    }
+
+    // Test that the items pushed onto the stack are popped out in reverse order
+    @Concolic.Entrypoint
+    public static void testStack() {
+        int n = Concolic.inputInt();
+        Concolic.assume(n > 0 && n <= 5);
+
+        int[] items = new int[n];
+        for (int i = 0; i != n; ++i) {
+            items[i] = Concolic.inputInt();
+        }
+
+        Stack s = new Stack();
+        for (int i = 0; i != items.length; ++i) {
+            s.push(items[i]);
+        }
+
+        int j = items.length - 1;
+        for (int i = 0; i != items.length; ++i) {
+            int x = s.pop();
+            Concolic.assertTrue(x == items[j]);
+            --j;
+        }
+    }
+
+    public static void main(String[] args) {
+        testStack();
+    }
+}
