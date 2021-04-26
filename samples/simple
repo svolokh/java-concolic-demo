@@ -12,7 +12,7 @@ public class Main {
         int y = Concolic.inputInt();
 
         if (x != y) {
-            Concolic.assertTrue(f(x) != x + 10);
+            Concolic.assertFalse(f(x) == x + 10);
         }
     }
 
