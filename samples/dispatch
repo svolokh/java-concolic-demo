@@ -1,0 +1,33 @@
+import csci699cav.Concolic;
+
+import java.util.LinkedList;
+
+public class Main {
+
+    public static class C {
+		int h;
+    	
+		public  C(int hash) {
+			h = hash;
+		}
+    	
+    		@Override 
+    		public int hashCode() {
+    			return h;
+    		}
+    }
+
+    @Concolic.Entrypoint
+    public static void run() {
+        Object o = new C(Concolic.inputInt());
+        int x = o.hashCode();
+        Concolic.assertFalse(x == 3);
+    }
+
+
+    public static void main(String[] args) {
+        run();
+    }
+
+}
+

@@ -159,7 +159,7 @@ public class Demo extends JPanel {
                     }
 
                     String cidfile = new File(f, "cid.txt").getAbsolutePath();
-                    Process p = Runtime.getRuntime().exec("docker run --cidfile " + cidfile + " -v " + f.getAbsolutePath() + ":/root/demo-code --network=none -m 1g java-concolic-demo");
+                    Process p = Runtime.getRuntime().exec("docker run -t --cidfile " + cidfile + " -v " + f.getAbsolutePath() + ":/root/demo-code --network=none -m 1g java-concolic-demo");
                     System.out.println("docker run --cidfile " + cidfile + " -v " + f.getAbsolutePath() + ":/root/demo-code --network=none -m 1g java-concolic-demo");
                     b.setEnabled(false);
                     readerThread = new Thread(new Runnable() {
