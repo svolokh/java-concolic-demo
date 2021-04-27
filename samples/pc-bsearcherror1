@@ -49,16 +49,13 @@ public class Main {
         }
 
         if(present==0 && present != result_implementation) {
-            System.exit(1); } /* implementation wrongly found elem in A */
+            Concolic.assertTrue(false); } /* implementation wrongly found elem in A */
         else {
             if(present==1 && present != result_implementation) {
-                System.exit(1); } /* implementation wrongly said elem was not in A */
+                Concolic.assertTrue(false); } /* implementation wrongly said elem was not in A */
             else {
                 if(modif<10) {
-                    System.exit(1); } /* implementation modified A */
-                else { 
-                    System.exit(0);
-                }
+                    Concolic.assertTrue(false); } /* implementation modified A */
             }
         }
         return;
