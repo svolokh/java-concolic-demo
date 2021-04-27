@@ -1,0 +1,68 @@
+import csci699cav.Concolic;
+
+public class Main {
+
+    // https://github.com/iTimeTraveler/SortAlgorithms/blob/master/src/main/java/com/example/SortAlgorithms.java
+    public static void bubbleSort1(int[] arr){
+        for (int i = arr.length - 1; i > 0; i--) {
+            for(int j = 0; j < i; j++){
+                if(arr[j] > arr[j+1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+    }
+
+    // https://github.com/akshaybahadur21/Sort/blob/master/Sort.java
+    public static void bubbleSort2(int a[],int n)
+	{
+		int temp;
+		boolean swap;
+		for(int i=0;i<n-1;i++)
+		{
+			swap=false;
+			for(int j=0;j<n-1;j++)
+			{
+				if(a[j]>a[(j+1)])
+				{
+					temp=a[j];
+					a[j]=a[(j+1)];
+					a[(j+1)]=temp;
+					swap=true;
+				}
+			}
+			if(swap==false)
+				break;
+		}
+	}
+ 
+    @Concolic.Entrypoint
+    public static void run() {
+        int n = Concolic.inputInt();
+        Concolic.assume(n >= 0 && n < 4);
+        int[] arr1 = new int[n];
+        int[] arr2 = new int[n];
+        for (int i = 0; i != n; ++i) {
+        	int x = Concolic.inputInt();
+        	Concolic.assume(x >= -100 && x <= 100);
+        	arr1[i] = x;
+        	arr2[i] = x;
+        }
+
+        bubbleSort1(arr1);
+        bubbleSort2(arr2, arr2.length);
+
+        for (int i = 0; i != n; ++i) {
+        	Concolic.assertTrue(arr1[i] == arr2[i]);
+        }
+    }
+
+
+    public static void main(String[] args) {
+        run();
+    }
+
+}
+
